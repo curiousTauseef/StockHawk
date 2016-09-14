@@ -92,12 +92,17 @@ public class MyStocksActivity extends AppCompatActivity implements LoaderManager
 					public void onItemClick(View v, int position) {
 						//TODO:
 						// do something on item click
+						Intent intent = new Intent(getApplicationContext(), StocksDetails.class);
+						String stockName = ((TextView)v.findViewById(R.id.stock_symbol)).getText().toString();
+						intent.putExtra(StocksDetails.ARG_STOCK_SYM, stockName);
+						startActivity(intent);
 					}
 				}));
 		recyclerView.setAdapter(mCursorAdapter);
 
 
 		FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+		fab.setContentDescription(getString(R.string.add_stock));
 		fab.attachToRecyclerView(recyclerView);
 		fab.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -243,6 +248,7 @@ public class MyStocksActivity extends AppCompatActivity implements LoaderManager
 			message = R.string.no_stocks_saved;
 		}
 		textView.setText(message);
+		textView.setContentDescription(getString(message));
 		textView.setVisibility(View.VISIBLE);
 	}
 
