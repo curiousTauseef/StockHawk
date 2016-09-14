@@ -33,7 +33,12 @@ public class Utils {
 				if (count == 1) {
 					jsonObject = jsonObject.getJSONObject("results")
 							.getJSONObject("quote");
-					batchOperations.add(buildBatchOperation(jsonObject));
+					Log.d("Check", jsonObject.toString());
+					if (jsonObject.getString("Ask").equals("null") || jsonObject.getString("Ask") == null){
+						return null;
+					}
+					else
+						batchOperations.add(buildBatchOperation(jsonObject));
 				} else {
 					resultsArray = jsonObject.getJSONObject("results").getJSONArray("quote");
 
